@@ -1,0 +1,12 @@
+.navigation-bar {
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+
+.navigation-bar > li {
+  float: left;
+  padding: 0 15px 0 15px;
+}
