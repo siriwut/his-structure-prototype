@@ -5,11 +5,11 @@ import { Provider as StoreProvider } from 'react-redux'
 import { createBrowserHistory } from 'history'
 import { ConnectedRouter } from 'connected-react-router'
 
-import createStore from './createStore'
-import registerServiceWorker from './registerServiceWorker'
+import createStore from 'createStore'
+import registerServiceWorker from 'registerServiceWorker'
 
-import './index.css'
-import App from './App'
+import 'index.css'
+import App from 'App'
 
 const history = createBrowserHistory()
 const store = createStore({ history })

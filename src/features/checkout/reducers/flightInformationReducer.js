@@ -11,6 +11,7 @@ export const types = {
 export default function reducer(state = {}, action) {
   switch (action.type) {
     case types.LOAD_FLIGHT_INFORMATION:
+      console.log('hello')
       return state
     case types.LOAD_FLIGHT_INFORMATION_SUCCESS:
       return state
