@@ -1,18 +1,26 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 import RouteWithSubRoutes from 'components/RouteWithSubRoutes/RouteWithSubRoutes'
 import routes from 'routes'
 import './App.css'
+
+import HomeView from 'views/home/HomeView'
+import CheckoutView from 'views/checkout/CheckoutView'
+import CompleteView from 'views/checkout/CompleteView'
+import PaymentView from 'views/checkout/PaymentView'
+import FlightInformationView from 'views/checkout/FlightInformationView'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        {/* <nav>
           <Link to="/checkout">Checkout</Link>
-        </nav>
+        </nav> */}
         <main>
-          {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+          {routes.map((route, i) => {
+            return <RouteWithSubRoutes key={i} {...route} />
+          })}
         </main>
       </div>
     );

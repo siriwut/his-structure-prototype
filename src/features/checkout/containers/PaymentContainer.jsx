@@ -20,7 +20,7 @@ const Option = Select.Option
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
-class FlightInformationContainer extends React.Component {
+class PaymentContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -44,36 +44,20 @@ class FlightInformationContainer extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <FormItem
               {...formItemLayout}
-              label="Country"
-              hasFeedback
+              label="Credit Card"
             >
-              {getFieldDecorator('country', {
+              {getFieldDecorator('creditCard', {
                 rules: [
-                  { required: true, message: 'Please select your country!' },
+                  { required: true, message: 'Please fill credit card' },
                 ],
               })(
-                <Select placeholder="Please select a country">
-                  <Option value="china">China</Option>
-                  <Option value="use">U.S.A</Option>
-                </Select>
-              )}
-            </FormItem>
-            <FormItem
-              {...formItemLayout}
-              label="Full Name"
-            >
-              {getFieldDecorator('fullName', {
-                rules: [
-                  { required: true, message: 'Please select your favourite colors!', type: 'array' },
-                ],
-              })(
-                <Input placeholder="Example: Siriwut Ponwapee" />
+                <Input placeholder="XXXX-XXXX-XXXX-XXXX" />
               )}
             </FormItem>
             <FormItem
               wrapperCol={{ span: 12, offset: 6 }}
             >
-              <Button type="primary" htmlType="submit">Go to Payment</Button>
+              <Button type="primary" htmlType="submit">Checkout</Button>
             </FormItem>
           </Form>
         </Col>
@@ -82,4 +66,4 @@ class FlightInformationContainer extends React.Component {
   }
 }
 
-export default Form.create()(FlightInformationContainer)
+export default Form.create()(PaymentContainer)

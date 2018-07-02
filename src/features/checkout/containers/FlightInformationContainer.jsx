@@ -20,7 +20,7 @@ const Option = Select.Option
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
-class PaymentContainer extends React.Component {
+class FlightInformationContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -44,14 +44,30 @@ class PaymentContainer extends React.Component {
           <Form onSubmit={this.handleSubmit}>
             <FormItem
               {...formItemLayout}
-              label="creditCard"
+              label="Country"
+              hasFeedback
             >
-              {getFieldDecorator('Credit Card', {
+              {getFieldDecorator('country', {
                 rules: [
-                  { required: true, message: 'Please fill credit card' },
+                  { required: true, message: 'Please select your country!' },
                 ],
               })(
-                <Input placeholder="XXXX-XXXX-XXXX-XXXX" />
+                <Select placeholder="Please select a country">
+                  <Option value="china">China</Option>
+                  <Option value="use">U.S.A</Option>
+                </Select>
+              )}
+            </FormItem>
+            <FormItem
+              {...formItemLayout}
+              label="Full Name"
+            >
+              {getFieldDecorator('fullName', {
+                rules: [
+                  { required: true, message: 'Please fill full name' },
+                ],
+              })(
+                <Input placeholder="Example: Siriwut Ponwapee" />
               )}
             </FormItem>
             <FormItem
@@ -66,4 +82,4 @@ class PaymentContainer extends React.Component {
   }
 }
 
-export default Form.create()(PaymentContainer)
+export default Form.create()(FlightInformationContainer)

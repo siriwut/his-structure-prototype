@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { containers } from 'features/checkout/flight-information'
-
-const { FlightInformationContainer } = containers
+import {
+  FlightInformationContainer,
+} from 'features/checkout/containers'
 
 export default class FlightInformationView extends Component {
   render() {
