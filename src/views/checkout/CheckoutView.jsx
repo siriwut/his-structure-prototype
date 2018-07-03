@@ -12,14 +12,14 @@ const { actions } = flightInformation
 
 const mapStateToProps = null
 const mapDispatchToProps = dispatch => bindActionCreators({
-  loadFlightInformation: actions.loadFlightInformation
+  loadCountries: actions.loadCountries
 }, dispatch)
 
 class CheckoutView extends Component {
   componentDidMount() {
-    const { loadFlightInformation } = this.props
-    console.log('----')
-    loadFlightInformation()
+    const { loadCountries } = this.props
+
+    loadCountries()
   }
 
   render() {
@@ -27,9 +27,6 @@ class CheckoutView extends Component {
 
     return (
       <div>
-        <div>
-          <Button onClick={ () => this.props.loadFlightInformation() } >Enter</Button>
-        </div>
         <ul className="navigation-bar" >
           <li>
             <Link to="/checkout/flight-information">Flight Information</Link>

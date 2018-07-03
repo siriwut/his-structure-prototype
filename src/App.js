@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 import RouteWithSubRoutes from 'components/RouteWithSubRoutes/RouteWithSubRoutes'
 import routes from 'routes'
+import 'antd/dist/antd.css'
+
 import './App.css'
 
 import HomeView from 'views/home/HomeView'

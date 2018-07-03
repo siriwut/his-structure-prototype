@@ -1,4 +1,7 @@
 import React from 'react'
+import { compose, bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import {
   Input,
   Form,
@@ -14,30 +17,47 @@ import {
   Row,
   Col
 } from 'antd'
-import 'antd/dist/antd.css'
+
+import { flightInformation } from '../reducers'
+
+const { actions: flightInformationAction } = flightInformation
+
 const FormItem = Form.Item
 const Option = Select.Option
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
+const mapStateToProps = state => ({
+  countryOptions: state.checkout.flightInformation.countries
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addFlightInformation: flightInformationAction.addFlightInformation
+}, dispatch)
+
 class FlightInformationContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      console.log(values)
+    const { form, history, addFlightInformation } = this.props
+
+    form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
+        addFlightInformation(values)
+        history.push('/checkout/payment')
       }
     })
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form
+    const { form: { getFieldDecorator }, countryOptions } = this.props
+
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 14 },
     }
+
     return (
       <Row>
         <Col span={12} offset={6}>
@@ -45,23 +65,25 @@ class FlightInformationContainer extends React.Component {
             <FormItem
               {...formItemLayout}
               label="Country"
-              hasFeedback
-            >
+              hasFeedback>
               {getFieldDecorator('country', {
                 rules: [
                   { required: true, message: 'Please select your country!' },
                 ],
               })(
                 <Select placeholder="Please select a country">
-                  <Option value="china">China</Option>
-                  <Option value="use">U.S.A</Option>
+                  { countryOptions && countryOptions.map(country => (
+                      <Option key={ country.value } value={country.value}>
+                        { country.label }
+                      </Option>
+                    ))
+                  }
                 </Select>
               )}
             </FormItem>
             <FormItem
               {...formItemLayout}
-              label="Full Name"
-            >
+              label="Full Name">
               {getFieldDecorator('fullName', {
                 rules: [
                   { required: true, message: 'Please fill full name' },
@@ -71,8 +93,7 @@ class FlightInformationContainer extends React.Component {
               )}
             </FormItem>
             <FormItem
-              wrapperCol={{ span: 12, offset: 6 }}
-            >
+              wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">Go to Payment</Button>
             </FormItem>
           </Form>
@@ -82,4 +103,8 @@ class FlightInformationContainer extends React.Component {
   }
 }
 
-export default Form.create()(FlightInformationContainer)
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  Form.create()
+)(FlightInformationContainer)

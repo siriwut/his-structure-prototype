@@ -1,4 +1,6 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import {
   Input,
   Form,
@@ -24,10 +26,11 @@ class PaymentContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.form.validateFields((err, values) => {
-      console.log(values)
+    const { form } = this.props
+    form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
+        console.log(values)
       }
     })
   }
