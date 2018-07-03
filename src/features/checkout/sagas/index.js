@@ -3,6 +3,6 @@ import createSaga from 'createSaga'
 
 import checkoutSaga from './checkoutSaga'
 
-export default [
+export default createSaga([
   call(checkoutSaga)
-]
+])

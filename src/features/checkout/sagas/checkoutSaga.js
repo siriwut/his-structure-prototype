@@ -1,18 +1,22 @@
-import { all, takeEvery } from 'redux-saga/effects'
+import { all, takeEvery, put } from 'redux-saga/effects'
 import createSaga from 'createSaga'
 
 import { types } from '../reducers/flightInformationReducer'
 
 
 export function* loadFlightInformation(action) {
-  yield
+  console.log('---load flight---')
+  yield put({ type: 'TEST_TAPE' })
 }
 
-export default function* saga(action) {
-  console.log('---hello--')
-  yield takeEvery('*', function* (action) { console.log(action) })
-  yield takeEvery(
-    types.LOAD_FLIGHT_INFORMATION,
-    function* () { console.log('hello') }
-  )
+
+export function* test(action) {
+  console.log(action)
+
+    yield put({ type: 'CROSS' })
 }
+
+export default createSaga([
+  takeEvery(types.LOAD_FLIGHT_INFORMATION, loadFlightInformation),
+  takeEvery('TEST_TAPE', test)
+])

@@ -24,19 +24,11 @@ export default function createStore({ initialState = {}, history } = {}) {
     initialState,
     compose(
       applyMiddleware(...middleware),
-      // composeWithDevTools(),
+      composeWithDevTools(),
     )
   )
 
-  sagaMiddleware.run(function* saga (action) {
-    console.log()
-    yield all([
-      takeEvery(types.LOAD_FLIGHT_INFORMATION, function* (action) {
-        console.log(action)
-        console.log('--5555--')
-      })
-    ])
-  })
+  sagaMiddleware.run(rootSaga)
 
   return store
 }

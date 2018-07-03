@@ -1,10 +1,18 @@
-import { all, call } from 'redux-saga/effects'
+import { all, call, takeEvery } from 'redux-saga/effects'
 import createSaga from 'createSaga'
-
 import checkoutSaga from 'features/checkout/sagas'
 
-export default function* saga() {
-  yield all([
-    ...checkoutSaga
-  ])
+import { types } from 'features/checkout/reducers/flightInformationReducer'
+
+function* testCross() {
+  console.log('test cross')
 }
+
+const crossSaga = createSaga([
+  takeEvery('CROSS', testCross)
+])
+
+export default createSaga([
+  call(checkoutSaga),
+  call(crossSaga)
+])
