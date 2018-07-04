@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { Button } from 'antd'
 
-import RouteWithSubRoutes from 'components/RouteWithSubRoutes/RouteWithSubRoutes'
+import RouteWithSubRoutes from 'components/common/RouteWithSubRoutes'
 import { flightInformation } from 'features/checkout/reducers'
 import './CheckoutView.css'
 

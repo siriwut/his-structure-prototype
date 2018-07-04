@@ -1,6 +1,7 @@
 import React from 'react'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import {
   Input,
   Form,
@@ -16,21 +17,35 @@ import {
   Row,
   Col
 } from 'antd'
-import 'antd/dist/antd.css'
+
+import { payment } from '../reducers'
+
+const { actions } = payment
+
 const FormItem = Form.Item
 const Option = Select.Option
 const RadioButton = Radio.Button
 const RadioGroup = Radio.Group
 
+const mapStateToProps = null
+const mapDispatchToProps = dispatch => bindActionCreators({
+  paid: actions.paid
+}, dispatch)
+
 class PaymentContainer extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const { form } = this.props
+    const { form, paid, history } = this.props
+
     form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
-        console.log(values)
+        paid({
+          number: values.creditCard
+        })
+
+        history.push('/checkout/complete')
       }
     })
   }
@@ -58,8 +73,7 @@ class PaymentContainer extends React.Component {
               )}
             </FormItem>
             <FormItem
-              wrapperCol={{ span: 12, offset: 6 }}
-            >
+              wrapperCol={{ span: 12, offset: 6 }}>
               <Button type="primary" htmlType="submit">Checkout</Button>
             </FormItem>
           </Form>
@@ -69,4 +83,8 @@ class PaymentContainer extends React.Component {
   }
 }
 
-export default Form.create()(PaymentContainer)
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps),
+  Form.create(),
+)(PaymentContainer)

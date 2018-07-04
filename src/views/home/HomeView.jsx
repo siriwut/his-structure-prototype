@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import RouteWithSubRoutes from 'components/RouteWithSubRoutes/RouteWithSubRoutes'
+import RouteWithSubRoutes from 'components/common/RouteWithSubRoutes'
 import './HomeView.css'
 
 export default class CheckoutView extends Component {
